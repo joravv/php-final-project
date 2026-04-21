@@ -7,27 +7,50 @@
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <div class="nav bar">
-        <h2> Fcb Employe </h2>
+    <div class="navbar">
+      
+        <div class="nav-links">
+         <ul>
+  <li><a href="default.asp">Home</a></li>
+  <li><a href="news.asp">players</a></li>
+  <li><a href="contact.asp">Matches</a></li>
+  <li><a href="about.asp">Injuries</a></li>
+</ul>  
+        
 </div>
-<div class="container">
-    <div class="sidebar">
-        <ul>
-            <li>Dashboard</li>
-            <li>players</li>
-            <li>traning</li>
-            <li>matches</li>
-            <li>messages</li>
-</ul>
 </div>
-<div class="Main">
-    <h2>Welcome to dashboard</h2>
-    <div class="cards">
-        <div class="card"> players:25</div>
-  <div class="card"> matches:3</div>
-    <div class="card"> injuries:2</div>
+      <div id="demo" class="carousel slide" data-ride="carousel">
+
+  <!-- Indicators -->
+  <ul class="carousel-indicators">
+    <li data-target="#demo" data-slide-to="0" class="active"></li>
+    <li data-target="#demo" data-slide-to="1"></li>
+    <li data-target="#demo" data-slide-to="2"></li>
+  </ul>
+
+  <!-- The slideshow -->
+  <div class="carousel-inner">
+    <div class="carousel-item active">
+      <img src="ucl.jpg" alt="Los Angeles">
+    </div>
+    <div class="carousel-item">
+      <img src="ucl2.jpg" alt="Chicago">
+    </div>
+    <div class="carousel-item">
+      <img src="ucl3.jpg" alt="New York">
+    </div>
+  </div>
+
+  <!-- Left and right controls -->
+  <a class="carousel-control-prev" href="#demo" data-slide="prev">
+    <span class="carousel-control-prev-icon"></span>
+  </a>
+  <a class="carousel-control-next" href="#demo" data-slide="next">
+    <span class="carousel-control-next-icon"></span>
+  </a>
 
 </div>
+
 </div>
 </body>
 </html>
