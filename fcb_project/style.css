@@ -3,30 +3,31 @@ h1{
     font-family: Arial, Helvetica, sans-serif;
 }
 
-  ul {
-  list-style-type: none;
+  .my-navbar {
+  width: 100%;
+}
+
+.my-navbar ul {
+  display: flex;              
   margin: 0;
   padding: 0;
-  overflow: hidden;
   background-color: #6d0d0d;
 }
 
-ul li {
-  float: left;
+.my-navbar ul li {
+  list-style: none;
 }
 
-ul li a {
+.my-navbar ul li a {
   display: block;
   color: white;
-  text-align: center;
-  padding: 14px 16px;
+  padding: 14px 20px;
   text-decoration: none;
 }
 
-ul li a:hover {
+.my-navbar ul li a:hover {
   background-color: #080bad;
 }
-
 body{
     margin: 0%;
      background-color:#070981
