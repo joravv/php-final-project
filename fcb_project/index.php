@@ -1,20 +1,23 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Employe of fcb</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <div class="my-navbar">
-  <ul>
-    <li><a href="dashboard.php">Home</a></li>
-    <li><a href="players.php">Players</a></li>
-    <li><a href="matches.php">Matches</a></li>
-    <li><a href="injuries.php">Injuries</a></li>
-  </ul>
+    <div class="navbar">
+      
+        <div class="nav-links">
+         <ul>
+  <li><a href="default.asp">Home</a></li>
+  <li><a href="news.asp">players</a></li>
+  <li><a href="contact.asp">Matches</a></li>
+  <li><a href="about.asp">Injuries</a></li>
+</ul>  
+        
+</div>
 </div>
       <div id="demo" class="carousel slide" data-ride="carousel">
 
@@ -48,8 +51,7 @@
 
 </div>
 
-<script src="main.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"></script>
+</div>
+<script src="script.js"></script>
 </body>
 </html>
