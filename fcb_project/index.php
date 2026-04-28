@@ -8,12 +8,12 @@
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-   <h1>HI</h1>
+   
     <div class="navbar">
     <h2>FCB Staff</h2>
 
     <ul class="nav-links">
-        <li><a href="#">Home</a></li>
+        <li><a href="index.php">Home</a></li>
         <li><a href="players.php">Players</a></li>
         <li><a href="matches.php">Matches</a></li>
         <li><a href="injuries.php">Injuries</a></li>
@@ -50,6 +50,33 @@
   </a>
 
 </div>
+
+<p> Welcome to FC Barcelona Staff Portal 
+  Manage players, matches,injuries</p>
+
+
+  <div class="stats">
+
+  <div class="stat-box">
+    <h3>12</h3>
+    <p>Players</p>
+</div>
+
+<div class="stat-box">
+    <h3>5</h3>
+    <p>matches</p>
+</div>
+
+<div class="stat-box">
+    <h3>3</h3>
+    <p>injuries</p>
+</div>
+
+<div class="stat-box">
+    <h3>8</h3>
+    <p>staff</p>
+</div>
+
 
 
 <script src="script.js"></script>
