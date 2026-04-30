@@ -1,59 +1,61 @@
 <?php
-session_start();
 include "db.php";
-include "functions.php";
-checkLogin();
 
-// ADD PLAYER (CRUD CREATE)
-if(isset($_POST["add"])){
 
-    $stmt = $pdo->prepare("INSERT INTO players(name,position,age,goals,assists)
-    VALUES(?,?,?,?,?)");
 
-    $stmt->execute([
-        $_POST["name"],
-        $_POST["position"],
-        $_POST["age"],
-        $_POST["goals"],
-        $_POST["assists"]
-    ]);
-}
+     if(isset($_POST["add"])){ $name = $_POST["name"];
+      $position = $_POST["position"]; $age = $_POST["age"];
+       $conn->query("INSERT INTO players(name, position, age) VALUES('$name','$position','$age')");
+        }  if(isset($_GET["delete"])){ $id = $_GET["delete"];
+         $conn->query("DELETE FROM players WHERE id=$id");
+          }  $result = $conn->query("SELECT * FROM players"); 
+          $res=$conn->query("SELECT * FROM players");
+          ?> 
+          <!DOCTYPE html> <html> <head> <title>Players</title> 
+          <link rel="stylesheet" href="style.css">
+         </head> 
+         <body> 
+            
+            
+           
 
-// GET PLAYERS (READ)
-$stmt = $pdo->query("SELECT * FROM players");
-$players = $stmt->fetchAll();
-?>
+             <div class="navbar">
+    <h2>FCB Staff</h2>
 
-<h1>Players</h1>
+    <ul class="nav-links">
+        <li><a href="index.php">Home</a></li>
+        <li><a href="players.php">Players</a></li>
+        <li><a href="matches.php">Matches</a></li>
+        <li><a href="injuries.php">Injuries</a></li>
+    </ul>
+</div>
+<h2>Players</h2> 
+        
+         <h1>Manage Players</h1>
+          </div> 
+          <div class="form-container"> 
+            <form method="POST"> 
+                <input name="name" placeholder="Name" required>
+                 <input name="position" placeholder="Position" required> 
+                 <input name="age" placeholder="Age" required> <button name="add">Add Player</button>
+                 </form>
+                 </div>
 
-<form method="POST">
-<input name="name" placeholder="Name">
-<input name="position" placeholder="Position">
-<input name="age" placeholder="Age">
-<input name="goals" placeholder="Goals">
-<input name="assists" placeholder="Assists">
-<button name="add">Add</button>
-</form>
-
-<table border="1">
+                 <table border="1">
+<tr><th>Player</th><th>Position</th><th>Age</th></tr>
+ while($r=$res->fetch_assoc()){ <?>
 <tr>
-<th>Name</th>
-<th>Position</th>
-<th>Age</th>
-<th>Actions</th>
+<td><?php echo $r["name"]; ?></td>  
+<td><?php echo $r["position"]; ?></td>
+<td><?php echo $r["age"]; ?></td>
+<td><a href="deleteplayers.php?id=<?=$r['id'];?>">Delete</a></td>
+<td><a href="editplayers.php?id=<?= $r['id'];?>">Update</a></td>
 </tr>
 
-<?php foreach($players as $p){ ?>  <!-- LOOP -->
-<tr>
-<td><?php echo $p["name"]; ?></td>
-<td><?php echo $p["position"]; ?></td>
-<td><?php echo $p["age"]; ?></td>
-
-<td>
-<a href="delete_player.php?id=<?php echo $p["id"]; ?>">Delete</a>
-</td>
-
-</tr>
 <?php } ?>
-
 </table>
+
+
+
+
+
