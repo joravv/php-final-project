@@ -3,13 +3,12 @@ session_start();
 include "db.php";
 
 
-/* PROTECT PAGE */
+
 if(!isset($_SESSION["user"])){
     header("Location: login.php");
     exit();
 }
 
-/* ADD PLAYER (COACH ONLY) */
 if(isset($_POST["add"]) && isset($_SESSION["role"]) && $_SESSION["role"]=="coach"){
 
     $name = $_POST["name"];
@@ -24,7 +23,7 @@ if(isset($_POST["add"]) && isset($_SESSION["role"]) && $_SESSION["role"]=="coach
     }
 }
 
-/* DELETE PLAYER (COACH ONLY) */
+
 if(isset($_GET["delete"]) && isset($_SESSION["role"]) && $_SESSION["role"]=="coach"){
 
     $id = $_GET["delete"];
@@ -36,7 +35,6 @@ if(isset($_GET["delete"]) && isset($_SESSION["role"]) && $_SESSION["role"]=="coa
     }
 }
 
-/* GET PLAYERS */
 $result = $conn->query("SELECT * FROM players");
 ?>
 
@@ -108,7 +106,7 @@ $result = $conn->query("SELECT * FROM players");
 
 <body>
 
-<!-- SIDEBAR -->
+
 <div class="sidebar">
     <h2>FCB Panel</h2>
 
@@ -119,12 +117,10 @@ $result = $conn->query("SELECT * FROM players");
     <a href="logout.php">Logout</a>
 </div>
 
-<!-- MAIN -->
 <div class="main">
 
-<h1>⚽ Players Management</h1>
+<h1> Players Management</h1>
 
-<!-- ADD FORM -->
 <?php if(isset($_SESSION["role"]) && $_SESSION["role"]=="coach"){ ?>
 <form method="POST">
     <input type="text" name="name" placeholder="Name" required>
@@ -135,7 +131,6 @@ $result = $conn->query("SELECT * FROM players");
 </form>
 <?php } ?>
 
-<!-- TABLE -->
 <table>
 <tr>
     <th>Name</th>

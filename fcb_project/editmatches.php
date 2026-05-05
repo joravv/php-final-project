@@ -4,11 +4,11 @@ include "db.php";
 
 $id = $_GET['id'];
 
-/* GET MATCH */
+
 $result = $conn->query("SELECT * FROM matches WHERE id=$id");
 $match = $result->fetch_assoc();
 
-/* UPDATE MATCH */
+
 if(isset($_POST['update']) && isset($_SESSION["role"]) && $_SESSION["role"]=="coach"){
     $op = $_POST['opponent'];
     $date = $_POST['date'];

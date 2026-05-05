@@ -4,11 +4,10 @@ include "db.php";
 
 $id = $_GET['id'];
 
-/* GET INJURY */
+
 $result = $conn->query("SELECT * FROM injuries WHERE id=$id");
 $injury = $result->fetch_assoc();
 
-/* UPDATE INJURY */
 if(isset($_POST['update']) && isset($_SESSION["role"]) && $_SESSION["role"]=="medical"){
     $player = $_POST['player'];
     $status = $_POST['status'];

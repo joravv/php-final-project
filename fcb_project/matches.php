@@ -2,7 +2,6 @@
 session_start();
 include "db.php";
 
-/* PROTECT PAGE */
 if(!isset($_SESSION["user"])){
     header("Location: login.php");
     exit();
@@ -10,7 +9,7 @@ if(!isset($_SESSION["user"])){
 
 $role = $_SESSION["role"];
 
-/* ADD MATCH */
+
 if(isset($_POST["add"]) && $role=="coach"){
     $op = $_POST["opponent"];
     $date = $_POST["date"];
@@ -20,13 +19,13 @@ if(isset($_POST["add"]) && $role=="coach"){
     VALUES('$op','$date','$stadium')");
 }
 
-/* DELETE MATCH */
+
 if(isset($_GET["delete"]) && $role=="coach"){
     $id = $_GET["delete"];
     $conn->query("DELETE FROM matches WHERE id=$id");
 }
 
-/* GET MATCHES */
+
 $res = $conn->query("SELECT * FROM matches ORDER BY match_date ASC");
 ?>
 
@@ -39,7 +38,7 @@ $res = $conn->query("SELECT * FROM matches ORDER BY match_date ASC");
 
 <body>
 
-<!-- SIDEBAR -->
+
 <div class="sidebar">
 
     <h2>FCB PANEL</h2>
@@ -50,24 +49,23 @@ $res = $conn->query("SELECT * FROM matches ORDER BY match_date ASC");
         <small><?php echo $role; ?></small>
     </div>
 
-    <a href="index.php">🏠 Dashboard</a>
-    <a href="players.php">👥 Players</a>
-    <a href="matches.php">⚽ Matches</a>
-    <a href="injuries.php">🏥 Injuries</a>
+    <a href="index.php"> Dashboard</a>
+    <a href="players.php"> Players</a>
+    <a href="matches.php"> Matches</a>
+    <a href="injuries.php"> Injuries</a>
 
-    <a class="logout" href="logout.php">🚪 Logout</a>
+    <a class="logout" href="logout.php"> Logout</a>
 </div>
 
-<!-- MAIN -->
 <div class="main">
 
-<h1>⚽ Match Center</h1>
+<h1> Match Center</h1>
 
 <?php if($role=="staff"){ ?>
 <p>You can only view matches (read-only access).</p>
 <?php } ?>
 
-<!-- ADD MATCH -->
+
 <?php if($role=="coach"){ ?>
 <div class="edit-container">
     <h3>Add New Match</h3>
@@ -87,7 +85,6 @@ $res = $conn->query("SELECT * FROM matches ORDER BY match_date ASC");
 </div>
 <?php } ?>
 
-<!-- MATCH TABLE -->
 <table>
 <tr>
     <th>Opponent</th>

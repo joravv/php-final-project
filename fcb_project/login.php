@@ -2,7 +2,6 @@
 session_start();
 include "db.php";
 
-/* IF ALREADY LOGGED IN → GO TO INDEX */
 if(isset($_SESSION["user"])){
     header("Location: index.php");
     exit();
@@ -23,7 +22,6 @@ if(isset($_POST["login"])){
         $_SESSION["user"] = $user["email"];
         $_SESSION["role"] = $user["role"];
 
-        /* 🔥 IMPORTANT FIX */
         header("Location: index.php");
         exit();
 

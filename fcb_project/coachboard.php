@@ -2,24 +2,24 @@
 session_start();
 include "db.php";
 
-/* SECURITY */
+
 if(!isset($_SESSION["user"]) || $_SESSION["role"] != "coach"){
     die("Access denied");
 }
 
-/* GET PLAYERS (FIXED) */
+
 $playersRes = $conn->query("SELECT * FROM players");
 $players = [];
 
 while($row = $playersRes->fetch_assoc()){
     $players[] = $row;
 }
-/* RESET OLD LINEUP */
+
 if(isset($_POST["save"])){
 
     $formation = $_POST["formation"];
 
-    /* RESET OLD LINEUP ONLY WHEN SAVING */
+    
     $conn->query("UPDATE lineups SET is_active = 0");
 
     if(isset($_POST["position"]) && is_array($_POST["position"])){
@@ -54,7 +54,7 @@ if(isset($_POST["save"])){
     <h2>FCB Tactical Board</h2>
 </div>
 
-<h1>⚽ Coach Tactical Board</h1>
+<h1> Coach Tactical Board</h1>
 
 <?php if(isset($_GET["saved"])){ ?>
     <p style="text-align:center; color:#00ff88;">Lineup saved!</p>
@@ -62,7 +62,6 @@ if(isset($_POST["save"])){
 
 <form method="POST">
 
-<!-- FORMATION -->
 <div style="text-align:center;">
     <label>Formation:</label>
     <select name="formation">
@@ -74,11 +73,11 @@ if(isset($_POST["save"])){
 
 <br>
 
-<!-- PITCH -->
+
 <div class="pitch">
 
 <?php
-/* POSITIONS (REALISTIC) */
+
 $positions = [
     "ST",
     "LW","RW",
@@ -102,9 +101,9 @@ foreach($positions as $pos){
 
 </div>
 
-<button name="save">💾 Save Starting XI</button>
+<button name="save"> Save Starting XI</button>
 
-<a href="index.php" class="back-btn">⬅ Back to Dashboard</a>
+<a href="index.php" class="back-btn"> Back to Dashboard</a>
 
 </form>
 

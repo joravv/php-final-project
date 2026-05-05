@@ -2,9 +2,8 @@ function greetUser(){
     alert("Welcome to FCB Staff Portal");
 }
 
-window.onload = greetUser; // EVENT
+window.onload = greetUser; 
 
-// SIMPLE SLIDER
 let index = 0;
 
 function changeBackground(){
@@ -13,4 +12,4 @@ function changeBackground(){
     index = (index + 1) % colors.length;
 }
 
-setInterval(changeBackground,3000); // EVENT
+setInterval(changeBackground,3000); 

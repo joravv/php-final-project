@@ -1,6 +1,4 @@
-/* =========================
-   FCB THEME (UPGRADED)
-========================= */
+
 
 body{
     margin:0;
@@ -9,15 +7,12 @@ body{
     color:#e6ecff;
 }
 
-/* HEADINGS */
 h1, h2, h3{
-    color:#ffcc00; /* Barça gold accent */
+    color:#ffcc00; 
     letter-spacing:0.5px;
 }
 
-/* =========================
-   NAVBAR (FCB STYLE)
-========================= */
+
 
 .navbar{
     display:flex;
@@ -50,9 +45,6 @@ h1, h2, h3{
     background:rgba(255,255,255,0.2);
 }
 
-/* =========================
-   SIDEBAR (CLUB PANEL STYLE)
-========================= */
 
 .sidebar{
     position:fixed;
@@ -92,7 +84,7 @@ h1, h2, h3{
     color:#aab6ff;
 }
 
-/* LOGOUT */
+
 .logout{
     background:#a50044;
     color:white !important;
@@ -103,18 +95,13 @@ h1, h2, h3{
     background:#ff004c;
 }
 
-/* =========================
-   MAIN AREA
-========================= */
+
 
 .main{
     margin-left:250px;
     padding:30px;
 }
 
-/* =========================
-   FORMS (FCB STYLE CARDS)
-========================= */
 
 form{
     margin:20px 0;
@@ -134,7 +121,7 @@ input::placeholder{
     color:#aab6ff;
 }
 
-/* BUTTON */
+
 button{
     padding:10px 16px;
     background:linear-gradient(90deg,#a50044,#004d98);
@@ -151,9 +138,7 @@ button:hover{
     box-shadow:0 0 15px rgba(255,0,76,0.3);
 }
 
-/* =========================
-   TABLES (STADIUM FEEL)
-========================= */
+
 
 table{
     width:100%;
@@ -185,9 +170,7 @@ tr:hover{
     background:rgba(165,0,68,0.15);
 }
 
-/* =========================
-   STATS (FIFA STYLE CARDS)
-========================= */
+
 
 .stats{
     display:flex;
@@ -218,9 +201,7 @@ tr:hover{
     color:#ffcc00;
 }
 
-/* =========================
-   EDIT / FORMS BOX
-========================= */
+
 
 .edit-container{
     width:420px;
@@ -232,9 +213,6 @@ tr:hover{
     box-shadow:0 10px 25px rgba(0,0,0,0.3);
 }
 
-/* =========================
-   LOGIN (CLUB STYLE)
-========================= */
 
 .login-body{
     margin:0;
@@ -255,9 +233,7 @@ tr:hover{
     box-shadow:0 10px 30px rgba(0,0,0,0.4);
 }
 
-/* =========================
-   LOGOUT BUTTON
-========================= */
+
 
 .logout-container{
     text-align:center;
@@ -279,7 +255,7 @@ tr:hover{
     box-shadow:0 0 20px rgba(0,77,152,0.4);
 }
 
-/* ===== COACH BOARD ===== */
+
 
 .pitch{
     width:600px;
@@ -301,13 +277,13 @@ tr:hover{
     border:none;
 }
 
-/* HEADER */
+
 h1{
     text-align:center;
     color:#ffcc00;
 }
 
-/* SAVE BUTTON */
+
 button{
     display:block;
     margin:20px auto;

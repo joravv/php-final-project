@@ -2,7 +2,7 @@
 session_start();
 include "db.php";
 
-/* PROTECT PAGE */
+
 if(!isset($_SESSION["user"])){
     header("Location: login.php");
     exit();
@@ -10,7 +10,6 @@ if(!isset($_SESSION["user"])){
 
 $role = $_SESSION["role"];
 
-/* ADD INJURY (MEDICAL ONLY) */
 if(isset($_POST["add"]) && $role=="medical"){
     $p = $_POST["player"];
     $s = $_POST["status"];
@@ -19,13 +18,13 @@ if(isset($_POST["add"]) && $role=="medical"){
     VALUES('$p','$s')");
 }
 
-/* DELETE INJURY (MEDICAL ONLY) */
+
 if(isset($_GET["delete"]) && $role=="medical"){
     $id = $_GET["delete"];
     $conn->query("DELETE FROM injuries WHERE id=$id");
 }
 
-/* GET DATA */
+
 $res = $conn->query("SELECT * FROM injuries ORDER BY id DESC");
 ?>
 
@@ -38,7 +37,7 @@ $res = $conn->query("SELECT * FROM injuries ORDER BY id DESC");
 
 <body>
 
-<!-- SIDEBAR -->
+
 <div class="sidebar">
 
     <h2>FCB PANEL</h2>
@@ -49,24 +48,24 @@ $res = $conn->query("SELECT * FROM injuries ORDER BY id DESC");
         <small><?php echo $role; ?></small>
     </div>
 
-    <a href="index.php">🏠 Dashboard</a>
-    <a href="players.php">👥 Players</a>
-    <a href="matches.php">⚽ Matches</a>
-    <a href="injuries.php">🏥 Injuries</a>
+    <a href="index.php"> Dashboard</a>
+    <a href="players.php"> Players</a>
+    <a href="matches.php"> Matches</a>
+    <a href="injuries.php"> Injuries</a>
 
-    <a class="logout" href="logout.php">🚪 Logout</a>
+    <a class="logout" href="logout.php"> Logout</a>
 </div>
 
-<!-- MAIN -->
+
 <div class="main">
 
-<h1>🏥 Medical Center</h1>
+<h1> Medical Center</h1>
 
 <?php if($role!="medical"){ ?>
 <p>You can only view injury reports (read-only access).</p>
 <?php } ?>
 
-<!-- ADD FORM -->
+
 <?php if($role=="medical"){ ?>
 <div class="edit-container">
     <h3>Add Injury Report</h3>
@@ -87,7 +86,7 @@ $res = $conn->query("SELECT * FROM injuries ORDER BY id DESC");
 </div>
 <?php } ?>
 
-<!-- TABLE -->
+
 <table>
 <tr>
     <th>Player</th>

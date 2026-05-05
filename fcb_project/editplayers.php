@@ -3,11 +3,10 @@ include "db.php";
 
 $id = $_GET['id'];
 
-/* GET PLAYER */
+
 $result = $conn->query("SELECT * FROM players WHERE id=$id");
 $player = $result->fetch_assoc();
 
-/* UPDATE PLAYER */
 if(isset($_POST['update'])){
     $name = $_POST['name'];
     $position = $_POST['position'];

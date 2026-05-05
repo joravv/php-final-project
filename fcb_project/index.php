@@ -2,25 +2,20 @@
 session_start();
 include "db.php";
 
-/* LOGIN CHECK */
 if(!isset($_SESSION["user"])){
     header("Location: login.php");
     exit();
 }
 
-/* STATS */
 $playersCount = $conn->query("SELECT COUNT(*) as t FROM players")->fetch_assoc()['t'];
 $matchesCount = $conn->query("SELECT COUNT(*) as t FROM matches")->fetch_assoc()['t'];
 $injuriesCount = $conn->query("SELECT COUNT(*) as t FROM injuries")->fetch_assoc()['t'];
 
-/* NEXT MATCH */
 $nextMatch = $conn->query("SELECT * FROM matches ORDER BY match_date ASC LIMIT 1")->fetch_assoc();
 $daysLeft = $nextMatch ? max(0, floor((strtotime($nextMatch['match_date'])-time())/86400)) : 0;
 
-/* ACTIVITY */
 $latestPlayers = $conn->query("SELECT name FROM players ORDER BY id DESC LIMIT 3");
 
-/* ✅ ACTIVE LINEUP (COACH SAVED STARTING XI) */
 $lineup = $conn->query("
     SELECT l.position, p.name
     FROM lineups l
@@ -64,7 +59,7 @@ h1{
     -webkit-text-fill-color:transparent;
 }
 
-/* STATS */
+
 .stats{
     display:flex;
     gap:20px;
@@ -93,7 +88,7 @@ h1{
     color:#00c2ff;
 }
 
-/* CARD */
+
 .card{
     margin-top:25px;
     padding:20px;
@@ -103,7 +98,7 @@ h1{
     box-shadow:0 8px 25px rgba(0,0,0,0.3);
 }
 
-/* COUNTDOWN */
+
 .countdown{
     font-size:28px;
     font-weight:bold;
@@ -111,7 +106,7 @@ h1{
     margin-top:10px;
 }
 
-/* ACTIVITY */
+
 .activity li{
     list-style:none;
     padding:8px;
@@ -121,12 +116,10 @@ h1{
     border-radius:5px;
 }
 
-/* COACH PANEL */
 .coach-panel{
     border-left:4px solid #ffcc00;
 }
 
-/* SIDEBAR */
 .sidebar{
     position:fixed;
     left:0;
@@ -155,45 +148,43 @@ h1{
 
 <body>
 
-<!-- SIDEBAR -->
+
 <div class="sidebar">
 <h2 style="color:#00c2ff;">FCB Panel</h2>
 
-<a href="index.php">🏠 Dashboard</a>
-<a href="players.php">⚽ Players</a>
-<a href="matches.php">📅 Matches</a>
-<a href="injuries.php">🏥 Injuries</a>
+<a href="index.php"> Dashboard</a>
+<a href="players.php"> Players</a>
+<a href="matches.php"> Matches</a>
+<a href="injuries.php"> Injuries</a>
 
 <?php if($_SESSION["role"]=="coach"){ ?>
-<a href="coachboard.php">🎯 Tactical Board</a>
+<a href="coachboard.php"> Tactical Board</a>
 <?php } ?>
 
-<a href="logout.php">🚪 Logout</a>
+<a href="logout.php"> Logout</a>
 </div>
 
-<!-- MAIN -->
 <div class="main">
 
 <h1>Club Dashboard</h1>
 
-<!-- COACH DASHBOARD CARD (RESTORED) -->
 <?php if($_SESSION["role"]=="coach"){ ?>
 <div class="card coach-panel">
-    <h2>🎯 Coach Panel</h2>
+    <h2> Coach Panel</h2>
     <p>Manage lineup, tactics and formations like a real club coach.</p>
 
     <a href="coachboard.php"
        style="display:inline-block; margin-top:10px; padding:10px 15px;
        background:#ffcc00; color:black; border-radius:8px;
        font-weight:bold; text-decoration:none;">
-       ⚽ Open Tactical Board
+        Open Tactical Board
     </a>
 </div>
 <?php } ?>
 
 <?php if($_SESSION["role"] == "staff"){ ?>
 <div class="card" style="border-left:4px solid #00c2ff;">
-    <h2>👕 Staff Kit Control</h2>
+    <h2> Staff Kit Control</h2>
 
     <p>
         Manage player kits and boots for training and matchdays.
@@ -204,34 +195,32 @@ h1{
        background:#00c2ff; color:black; border-radius:8px;
        font-weight:bold; text-decoration:none;">
 
-       👕 Open Kit Manager
+        Open Kit Manager
     </a>
 </div>
 <?php } ?>
 
-<!-- STATS -->
 <div class="stats">
 
 <div class="stat-box">
 <h3><?= $playersCount ?></h3>
-<p>⚽ Players</p>
+<p> Players</p>
 </div>
 
 <div class="stat-box">
 <h3><?= $matchesCount ?></h3>
-<p>📅 Matches</p>
+<p> Matches</p>
 </div>
 
 <div class="stat-box">
 <h3><?= $injuriesCount ?></h3>
-<p>🏥 Injuries</p>
+<p> Injuries</p>
 </div>
 
 </div>
 
-<!-- NEXT MATCH -->
 <div class="card">
-<h2>⚡ Next Match</h2>
+<h2> Next Match</h2>
 
 <?php if($nextMatch){ ?>
 <p>Opponent: <b><?= $nextMatch['opponent'] ?></b></p>
@@ -247,9 +236,8 @@ h1{
 
 </div>
 
-<!-- ACTIVITY -->
 <div class="card">
-<h2>🔔 Recent Activity</h2>
+<h2> Recent Activity</h2>
 
 <ul class="activity">
 <?php while($p = $latestPlayers->fetch_assoc()){ ?>
@@ -260,7 +248,7 @@ h1{
 </div>
 
 <div class="card">
-    <h2>⚽ Starting XI</h2>
+    <h2> Starting XI</h2>
 
     <?php if($lineup->num_rows > 0){ ?>
         <ul class="activity">
@@ -276,7 +264,7 @@ h1{
 </div>
 
 <div class="card">
-<h2>👕 Kits & Boots</h2>
+<h2> Kits & Boots</h2>
 
 <?php while($k = $kits->fetch_assoc()){ ?>
 

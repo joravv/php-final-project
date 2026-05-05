@@ -2,19 +2,19 @@
 session_start();
 include "db.php";
 
-/* LOGIN CHECK */
+
 if(!isset($_SESSION["user"])){
     header("Location: login.php");
     exit();
 }
 
-/* SAVE KITS & BOOTS */
+
 if(isset($_POST["save"])){
 
-    // delete old selections
+  
     $conn->query("DELETE FROM player_appearance");
 
-    // save new selections
+  
     if(isset($_POST["kit"]) && isset($_POST["boots"])){
 
         foreach($_POST["kit"] as $player_id => $kit){
@@ -31,10 +31,8 @@ if(isset($_POST["save"])){
     }
 }
 
-/* GET PLAYERS */
 $players = $conn->query("SELECT * FROM players");
 
-/* GET SAVED DATA */
 $saved = $conn->query("
     SELECT pa.*, p.name
     FROM player_appearance pa
@@ -111,9 +109,9 @@ button{
 
 <div class="main">
 
-<a class="back-btn" href="index.php">⬅ Back to Dashboard</a>
+<a class="back-btn" href="index.php"> Back to Dashboard</a>
 
-<h1>👕 Kit & Boots Manager</h1>
+<h1> Kit & Boots Manager</h1>
 
 <?php if(isset($success)){ ?>
     <div class="success"><?= $success ?></div>
@@ -131,7 +129,7 @@ button{
 
     <div class="row">
 
-        <!-- KITS -->
+        
         <div>
             <p>Kit</p>
             <?php for($i=1; $i<=3; $i++){ ?>
@@ -142,7 +140,6 @@ button{
             <?php } ?>
         </div>
 
-        <!-- BOOTS -->
         <div>
             <p>Boots</p>
             <?php for($i=1; $i<=3; $i++){ ?>
