@@ -2,30 +2,65 @@
 session_start();
 include "db.php";
 
+/* IF ALREADY LOGGED IN → GO TO INDEX */
+if(isset($_SESSION["user"])){
+    header("Location: index.php");
+    exit();
+}
+
+$error = "";
+
 if(isset($_POST["login"])){
 
     $email = $_POST["email"];
     $password = $_POST["password"];
 
-    $stmt = $pdo->prepare("SELECT * FROM users WHERE email=? AND password=?");
-    $stmt->execute([$email,$password]);
+    $res = $conn->query("SELECT * FROM users WHERE email='$email' AND password='$password'");
 
-    if($stmt->rowCount() > 0){
-        $user = $stmt->fetch();
-        $_SESSION["user"] = $user["name"];
+    if($res->num_rows > 0){
+        $user = $res->fetch_assoc();
+
+        $_SESSION["user"] = $user["email"];
         $_SESSION["role"] = $user["role"];
 
-        header("Location: dashboard.php");
+        /* 🔥 IMPORTANT FIX */
+        header("Location: index.php");
+        exit();
+
     } else {
-        $error = "Wrong login";
+        $error = "Wrong email or password";
     }
 }
 ?>
 
-<form method="POST">
-<input name="email" placeholder="Email">
-<input name="password" type="password" placeholder="Password">
-<button name="login">Login</button>
-</form>
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Login</title>
+    <link rel="stylesheet" href="style.css">
+</head>
 
-<?php if(isset($error)) echo $error; ?>
+<body class="login-body">
+
+<div class="login-box">
+
+    <h2>FCB Staff Login</h2>
+
+    <?php if($error != ""){ ?>
+        <p class="error"><?php echo $error; ?></p>
+    <?php } ?>
+
+    <form method="POST">
+
+        <input type="email" name="email" placeholder="Email" required>
+
+        <input type="password" name="password" placeholder="Password" required>
+
+        <button name="login">Login</button>
+
+    </form>
+
+</div>
+
+</body>
+</html>

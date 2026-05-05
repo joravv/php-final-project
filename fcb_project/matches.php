@@ -1,61 +1,121 @@
-     <!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="style.css">
-    <title>Document</title>
-</head>
-<body>
-    
-    <div class="navbar">
-    <h2>FCB Staff</h2>
+<?php
+session_start();
+include "db.php";
 
-    <ul class="nav-links">
-        <li><a href="index.php">Home</a></li>
-        <li><a href="players.php">Players</a></li>
-        <li><a href="matches.php">Matches</a></li>
-        <li><a href="injuries.php">Injuries</a></li>
-    </ul>
-</div>
-        
-</div>
-</div>
-</body>
-</html>
-
-
-<?php include "db.php";
-
-if(isset($_POST["add"])){
-$op=$_POST["opponent"];
-$date=$_POST["date"];
-$stadium=$_POST["stadium"];
-
-$conn->query("INSERT INTO matches(opponent,match_date,stadium)
-VALUES('$op','$date','$stadium')");
+/* PROTECT PAGE */
+if(!isset($_SESSION["user"])){
+    header("Location: login.php");
+    exit();
 }
 
-$res=$conn->query("SELECT * FROM matches");
+$role = $_SESSION["role"];
+
+/* ADD MATCH */
+if(isset($_POST["add"]) && $role=="coach"){
+    $op = $_POST["opponent"];
+    $date = $_POST["date"];
+    $stadium = $_POST["stadium"];
+
+    $conn->query("INSERT INTO matches(opponent, match_date, stadium)
+    VALUES('$op','$date','$stadium')");
+}
+
+/* DELETE MATCH */
+if(isset($_GET["delete"]) && $role=="coach"){
+    $id = $_GET["delete"];
+    $conn->query("DELETE FROM matches WHERE id=$id");
+}
+
+/* GET MATCHES */
+$res = $conn->query("SELECT * FROM matches ORDER BY match_date ASC");
 ?>
 
-<h1>Matches</h1>
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Matches</title>
+    <link rel="stylesheet" href="style.css">
+</head>
 
-<form method="POST">
-<input name="opponent" placeholder="Opponent">
-<input name="date" type="date">
-<input name="stadium" placeholder="Stadium">
-<button name="add">Add</button>
-</form>
+<body>
 
-<table border="1">
-<tr><th>Opponent</th><th>Date</th><th>Stadium</th></tr>
-<?php while($r=$res->fetch_assoc()){ ?>
+<!-- SIDEBAR -->
+<div class="sidebar">
+
+    <h2>FCB PANEL</h2>
+
+    <div class="user">
+        Logged in as<br>
+        <b><?php echo $_SESSION["user"]; ?></b><br>
+        <small><?php echo $role; ?></small>
+    </div>
+
+    <a href="index.php">🏠 Dashboard</a>
+    <a href="players.php">👥 Players</a>
+    <a href="matches.php">⚽ Matches</a>
+    <a href="injuries.php">🏥 Injuries</a>
+
+    <a class="logout" href="logout.php">🚪 Logout</a>
+</div>
+
+<!-- MAIN -->
+<div class="main">
+
+<h1>⚽ Match Center</h1>
+
+<?php if($role=="staff"){ ?>
+<p>You can only view matches (read-only access).</p>
+<?php } ?>
+
+<!-- ADD MATCH -->
+<?php if($role=="coach"){ ?>
+<div class="edit-container">
+    <h3>Add New Match</h3>
+
+    <form method="POST" class="edit-form">
+        <label>Opponent</label>
+        <input name="opponent" required>
+
+        <label>Date</label>
+        <input name="date" type="date" required>
+
+        <label>Stadium</label>
+        <input name="stadium" required>
+
+        <button name="add">Add Match</button>
+    </form>
+</div>
+<?php } ?>
+
+<!-- MATCH TABLE -->
+<table>
 <tr>
-<td><?php echo $r["opponent"]; ?></td>
-<td><?php echo $r["match_date"]; ?></td>
-<td><?php echo $r["stadium"]; ?></td>
+    <th>Opponent</th>
+    <th>Date</th>
+    <th>Stadium</th>
+    <th>Actions</th>
+</tr>
+
+<?php while($r = $res->fetch_assoc()){ ?>
+<tr>
+    <td><?php echo $r["opponent"]; ?></td>
+    <td><?php echo $r["match_date"]; ?></td>
+    <td><?php echo $r["stadium"]; ?></td>
+
+    <td>
+        <?php if($role=="coach"){ ?>
+            <a href="editmatches.php?id=<?php echo $r['id']; ?>">Edit</a> |
+            <a href="matches.php?delete=<?php echo $r['id']; ?>">Delete</a>
+        <?php } else { ?>
+            View only
+        <?php } ?>
+    </td>
 </tr>
 <?php } ?>
+
 </table>
 
+</div>
+
+</body>
+</html>
